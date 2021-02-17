@@ -1,0 +1,42 @@
+<!-- Default form subscription -->
+<div class="container-fluid login h-100">
+  <div class=""></div>
+
+  <!-- <div class="loader loading" *ngIf="localStorage.getItem('loadingFlag') == 'ture'">Loading...</div> -->
+
+  <section class="text-center border rounded border-light p-5 w-50 h-50 center bg-white">
+    <div *ngIf="alertFlag" class="alert alert-danger">
+      يجب ادخال بيانات صحيحه
+    </div>
+
+    <form [formGroup]="logInForm" (ngSubmit)="logIn()">
+
+      <h1 class="h4 mb-4">تسجيل الدخول</h1>
+
+
+      <!-- userName -->
+      <input type="text" formControlName="userName" class="form-control ar-dir" placeholder="اسم المستخدم">
+
+      <!-- password -->
+      <div class="input-group my-4">
+        <div class="input-group-append" (click)="passFlag = !passFlag">
+          <span class="input-group-text" *ngIf="passFlag == true">
+            <i class="fas fa-eye-slash fa-2x"></i>
+          </span>
+          <span class="input-group-text" *ngIf="passFlag == false">
+            <i class="fas fa-eye fa-2x"></i>
+          </span>
+        </div>
+        <input [type]="passFlag ? 'text':'password'" formControlName="password" class="form-control ar-dir" placeholder="كلمة المرور">
+      </div>
+
+      <!-- Sign in button -->
+      <button class="btn custom-btn" type="submit" [disabled]="!logInForm.valid">دخول</button>
+
+
+    </form>
+
+  </section>
+  <!-- Default form subscription -->
+
+</div>
