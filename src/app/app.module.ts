@@ -25,7 +25,7 @@ import { IndexEmpComponent } from './views/employees/index-emp/index-emp.compone
 import { SearchEmpComponent } from './views/employees/search-emp/search-emp.component';
 import { NgxPaginationModule } from "ngx-pagination";
 import { UpdateAdminComponent } from './views/admins/update-admin/update-admin.component';
-import { SimpleModalModule } from "ngx-simple-modal";
+// import { SimpleModalModule } from "ngx-simple-modal";
 import { ShowDeptComponent } from './views/departments/show-dept/show-dept.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -56,7 +56,8 @@ import { ShowDeptComponent } from './views/departments/show-dept/show-dept.compo
     FlashMessagesModule.forRoot(),
     FormsModule,
     NgxPaginationModule,
-    SimpleModalModule
+    // SimpleModalModule
+    // SimpleModalModule.forRoot({container: "modal-container"})
     // NgbModule,
     // ModalModule.forRoot()
   ],

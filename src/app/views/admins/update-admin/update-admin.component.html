@@ -1,0 +1,32 @@
+<!-- Default form subscription -->
+
+<section class="text-center border rounded border-light p-5 w-50 mx-auto bg-white ar-dir card">
+  <!-- <div *ngIf="alertFlag" class="alert alert-danger">
+    يجب ادخال بيانات صحيحه
+  </div> -->
+
+  <form [formGroup]="updateAdminForm" (ngSubmit)="update()">
+
+    <h1 class="h4 mb-4">تعديل كلمة المرور </h1>
+
+    <!-- password -->
+    <div class="input-group my-4 {{alertFlag? 'animate__animated animate__shakeX':''}}">
+      <input [type]="passFlag ? 'text':'password'" formControlName="password" class="form-control ar-dir" placeholder="كلمة المرور">
+      <div class="input-group-append" (click)="passFlag = !passFlag">
+        <span class="input-group-text" *ngIf="passFlag == true">
+          <i class="fas fa-eye-slash fa-2x"></i>
+        </span>
+        <span class="input-group-text" *ngIf="passFlag == false">
+          <i class="fas fa-eye fa-2x"></i>
+        </span>
+      </div>
+    </div>
+
+    <!-- submit button -->
+    <button class="btn custom-btn" type="submit" [disabled]="!updateAdminForm.valid">تعديل</button>
+    <button class="btn btn-secondary mx-2" (click)="clear()" *ngIf="updateAdminForm.dirty && (!updateAdminForm.get('password').errors?.required)">اعادة تعيين</button>
+
+  </form>
+
+</section>
+<!-- Default form subscription -->

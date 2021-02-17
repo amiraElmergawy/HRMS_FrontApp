@@ -1,0 +1,45 @@
+<div class="h-100 w-100 ar-dir bg-white" *ngIf="admins != ''">
+
+  <table class="table  table-hover mt-3 scroll">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"> الاسم </th>
+        <!-- <th scope="col"> الاقسام المتفرعه </th> -->
+        <th scope="col" *ngIf="currentUserType"> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let admin of admins | paginate:{itemsPerPage: 5, currentPage:p}; let i = index">
+        <td>{{i+1}}</td>
+        <td contenteditable='true'>{{admin.userName}}</td>
+        <td>
+          <!-- <div *ngFor="let child of admin.childs">
+            {{child.userName}}
+          </div> -->
+        </td>
+        <td *ngIf="currentUserType">
+            <ng-container *ngIf="updateFlag; else elseTemplate">
+              <span class="btn custom-update-btn mx-2" (click)="update(admin._id, admin.userName, $event)">حفظ</span>
+              <span class="btn custom-update-btn mx-2" [routerLink]="[ '/home/update-user/', admin._id ]">تحديث كلمة المرور</span>
+              <span class="btn btn-secondary" (click)="cancel(admin.userName,$event)">الغاء</span>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <span class="btn custom-update-btn mx-2" (click)="updateFlag = true"  title="تعديل">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+              <span class="btn custom-delete-btn" (click)="delete(admin._id, $event)"  title="مسح">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="pagination">
+    <pagination-controls previousLabel="السابق"
+    nextLabel="التالي" (pageChange)="p=$event"></pagination-controls>
+  </div>
+
+</div>

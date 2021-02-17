@@ -16,9 +16,6 @@ import { NotFoundComponent } from './views/shared/not-found/not-found.component'
 
 const routes: Routes = [
   {
-    path:'update', component: UpdateAdminComponent
-  },
-  {
     path: 'logIn', component: LoginComponent
   },
   {
@@ -41,6 +38,9 @@ const routes: Routes = [
       },
       {
         path: 'show-all-users', component: IndexAdminComponent
+      },
+      {
+        path:'update-user/:id', component: UpdateAdminComponent
       },
       // emp routes
       {
