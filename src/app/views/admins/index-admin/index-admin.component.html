@@ -1,8 +1,8 @@
-<div class="h-100 w-100 ar-dir bg-white" *ngIf="admins != ''">
+<div class="h-100 w-100 ar-dir bg-white card" *ngIf="admins != ''">
 
-  <table class="table  table-hover mt-3 scroll">
+  <table class="table table-hover mt-3 scroll">
     <thead>
-      <tr>
+      <tr class="daisy-color">
         <th scope="col">#</th>
         <th scope="col"> الاسم </th>
         <!-- <th scope="col"> الاقسام المتفرعه </th> -->
@@ -11,8 +11,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let admin of admins | paginate:{itemsPerPage: 5, currentPage:p}; let i = index">
-        <td>{{i+1}}</td>
-        <td contenteditable='true'>{{admin.userName}}</td>
+        <td class="daisy-color">{{i+1}}</td>
+        <td contenteditable='true' #userName class="daisy-color">{{admin.userName}}</td>
         <td>
           <!-- <div *ngFor="let child of admin.childs">
             {{child.userName}}
@@ -25,7 +25,7 @@
               <span class="btn btn-secondary" (click)="cancel(admin.userName,$event)">الغاء</span>
             </ng-container>
             <ng-template #elseTemplate>
-              <span class="btn custom-update-btn mx-2" (click)="updateFlag = true"  title="تعديل">
+              <span class="btn custom-update-btn mx-2" (click)="updateFlag = true; userName.focus()"  title="تعديل">
                 <i class="fas fa-pencil-alt"></i>
               </span>
               <span class="btn custom-delete-btn" (click)="delete(admin._id, $event)"  title="مسح">
@@ -37,7 +37,7 @@
     </tbody>
   </table>
 
-  <div id="pagination">
+  <div id="pagination" class="daisy-color">
     <pagination-controls previousLabel="السابق"
     nextLabel="التالي" (pageChange)="p=$event"></pagination-controls>
   </div>
