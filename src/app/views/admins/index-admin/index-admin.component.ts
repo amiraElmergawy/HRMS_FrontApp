@@ -28,7 +28,7 @@ export class IndexAdminComponent implements OnInit {
     this.admins = this.sharingService.getData()
     // console.log(this.admins)
     if (this.admins == '') {
-      this.service.index('admins').subscribe(
+      this.service.show('admins').subscribe(
         data => {
           // console.log(data)
           localStorage.setItem('loadingFlag', 'false')
