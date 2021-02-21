@@ -1,0 +1,31 @@
+<!-- Default form subscription -->
+
+<section class="text-center border rounded border-light px-4 w-75 mx-auto bg-white card">
+
+  <form #searchForm="ngForm">
+
+    <!-- <h1 class="h4 mb-4">بحث عن قسم</h1> -->
+
+    <div class="input-group my-4 {{alertFlag? 'animate__animated animate__shakeX':''}}">
+
+      <div class="input-group-append" (click)="search()">
+
+        <span class="input-group-text">
+          <i class="fas fa-search fa-2x"></i>
+        </span>
+
+      </div>
+
+      <input class="form-control ar-dir" placeholder=" بحث ..." name="searchValue " type="text" [(ngModel)]="searchValue"
+      required>
+
+    </div>
+
+  </form>
+
+  <ng-container *ngIf="data != ''">
+    <app-index-dept></app-index-dept>
+  </ng-container>
+
+</section>
+<!-- Default form subscription -->

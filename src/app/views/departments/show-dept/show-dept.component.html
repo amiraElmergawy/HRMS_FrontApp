@@ -1,0 +1,127 @@
+<main *ngIf="department !=''" class="ar-dir bg-white">
+
+  <div class="bg-light pt-3 px-3 pt-md-2 px-md-5 overflow-hidden card d-flex flex-row">
+
+    <h2 class="display-5 mx-auto" contenteditable='true'#deptName>
+      قسم {{department?.name}}
+    </h2>
+
+    <div *ngIf="currentUserType" class="mt-2">
+
+      <ng-container *ngIf="updateFlag; else elseTemplate2">
+        <span class="btn custom-update-btn mx-2 text-white" (click)="update($event)">تحديث</span>
+        <span class="btn btn-secondary text-white" (click)="cancel($event)">الغاء</span>
+      </ng-container>
+
+      <ng-template #elseTemplate2>
+        <span class="btn custom-update-btn mx-2" (click)="updateFlag = true; deptName.focus()" title="تحديث">
+          <i class="fas fa-pencil-alt text-white"></i>
+        </span>
+      </ng-template>
+
+    </div>
+
+  </div>
+
+  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+
+    <div class="bg-light me-md-3 pt-3 pt-md-2 overflow-hidden text-center card"
+      *ngIf="(deptHead !='' && deptHead) || department?.childs?.length > 0">
+      <div class="my-3 p-3">
+
+        <!-- head section -->
+        <div class="{{updateHeadFlag?'':'d-flex flex-row justify-content-between'}}">
+          <p class="display-6" *ngIf="deptHead !='' && deptHead">رئيس القسم : {{deptHead?.personalData?.name}}</p>
+
+          <div *ngIf="currentUserType">
+
+            <div class="ar-dir mb-3" *ngIf="allEmps != '' && allEmps && updateHeadFlag">
+              <select class="form-select" [(ngModel)]="headId">
+                <option selected disabled value=""> اختر رئيس للقسم ...</option>
+                <option *ngFor="let emp of allEmps" value="{{emp._id}}">{{emp.personalData.name}}</option>
+              </select>
+            </div>
+
+            <ng-container *ngIf="updateHeadFlag; else elseTemplate3">
+              <span class="btn custom-update-btn mx-2 mb-1 text-white" (click)="update()">تحديث</span>
+              <span class="btn btn-secondary text-white" (click)="updateHeadFlag = false">الغاء</span>
+            </ng-container>
+
+            <ng-template #elseTemplate3>
+              <span class="btn custom-update-btn mx-2" (click)="getAllEmployees()" title="تحديث">
+                <i class="fas fa-pencil-alt text-white"></i>
+              </span>
+            </ng-template>
+
+          </div>
+        </div>
+
+        <!-- show children and remove them section -->
+        <div *ngIf="department?.childs?.length > 0">
+          <h4 class="display-6 text-end">الاقسام المتفرعه من هذا القسم</h4>
+          <ul>
+            <li class="lead" *ngFor="let child of department?.childs | paginate:{itemsPerPage: 2, currentPage:p};"
+              class="d-flex flex-row justify-content-around mb-3">
+              <a (click)="show(child._id)" class="pointer lead">
+                &bull; &nbsp;{{child?.name}}
+              </a>
+
+              <div *ngIf="currentUserType" class="d-inline">
+
+                <ng-container *ngIf="removeFlag; else elseTemplate">
+                  <span class="btn custom-update-btn mx-2 text-white" (click)="removeChild(child._id)">مسح</span>
+                  <span class="btn btn-secondary text-white" (click)="removeFlag = false">الغاء</span>
+                </ng-container>
+
+                <ng-template #elseTemplate>
+                  <span class="btn custom-update-btn" (click)="removeFlag = true" title="مسح">
+                    <i class="fas fa-trash-alt text-white"></i>
+                  </span>
+                </ng-template>
+
+              </div>
+
+            </li>
+          </ul>
+
+          <div id="pagination">
+            <pagination-controls previousLabel="السابق" nextLabel="التالي" (pageChange)="p=$event">
+            </pagination-controls>
+          </div>
+
+          <!-- adding children section -->
+          <div class="ar-dir mb-3" *ngIf="departments != '' && departments && addFlag">
+            <select class="form-select" [(ngModel)]="childId">
+              <option selected disabled value=""> قسم للربط ...</option>
+              <option *ngFor="let dept of departments" value="{{dept._id}}">{{dept.name}}</option>
+            </select>
+          </div>
+          <ng-container *ngIf="addFlag; else elseTemplate1">
+            <span class="btn custom-update-btn mx-2 text-white" (click)="addChild()">اضافه</span>
+            <span class="btn btn-secondary text-white" (click)="addFlag = false">الغاء</span>
+          </ng-container>
+          <ng-template #elseTemplate1>
+            <div class="btn custom-delete-btn text-white mt-4" (click)="getDepartments()">اضافة قسم اخر</div>
+          </ng-template>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bg-light me-md-3 pt-3 px-3 pt-md-2 px-md-5 text-center card" *ngIf="employees !=''">
+      <div class="my-3 py-3">
+
+        <h2 class="display-5">العاملين بالقسم</h2>
+        <ul>
+          <li class="lead" *ngFor="let emp of employees">
+            &bull; &nbsp;{{emp?.personalData?.name}}
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+
+</main>

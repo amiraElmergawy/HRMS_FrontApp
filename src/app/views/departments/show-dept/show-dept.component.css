@@ -1,0 +1,26 @@
+
+/*
+ * Dummy devices (replace them with your own or something else entirely!)
+ */
+
+.flex-equal > * {
+  flex: auto;
+}
+@media (min-width: 900px) {
+  .flex-md-equal > * {
+    flex: auto;
+  }
+}
+
+*{
+  color: var(--daisy-brush);
+}
+
+ul{
+  list-style-type: none;
+}
+
+a{
+  text-decoration: none;
+  color: var(--daisy-brush);
+}

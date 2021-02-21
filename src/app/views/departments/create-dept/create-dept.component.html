@@ -1,0 +1,38 @@
+<!-- Default form subscription -->
+
+<section class="text-center border rounded border-light p-5 w-50 mx-auto bg-white ar-dir card">
+
+  <form [formGroup]="deptForm" (ngSubmit)="add()">
+
+    <h1 class="mb-4 daisy-color">اضافة قسم</h1>
+
+    <!-- deptName -->
+    <input type="text" formControlName="name" class="form-control ar-dir mb-3 {{alertFlag? 'animate__animated animate__shakeX alert-danger':''}} daisy-color" placeholder="اسم القسم">
+    <div *ngIf="deptForm.get('name').invalid && deptForm.get('name').dirty" class="mb-1 alert">
+      <div *ngIf="deptForm.get('name').errors['minlength']" class="alert-warning p-2 rounded">
+        يجب ادخال 4 احرف علي الاقل
+      </div>
+      <div *ngIf="deptForm.get('name').errors['required']" class="alert-danger p-2 rounded">
+        هذا الحقل مطلوب
+      </div>
+      <div *ngIf="deptForm.get('name').errors['pattern']" class="alert-warning p-2 rounded">
+        لا يسمح بادخال علامات او احرف غير العربية
+      </div>
+    </div>
+
+    <div class="ar-dir mb-3" *ngIf="employees != ''">
+      <select formControlName="head" class="form-select daisy-color">
+        <option selected disabled value="">  رئيس القسم  ... </option>
+        <option *ngFor="let emp of employees" value="{{emp._id}}">{{emp.personalData.name}}</option>
+      </select>
+    </div>
+
+    <!-- Submit button -->
+    <button class="btn custom-btn text-white" type="submit" [disabled]="!deptForm.valid">اضافه</button>
+    <button class="btn btn-secondary mx-2" (click)="clear()" *ngIf="deptForm.dirty && !deptForm.get('name').errors?.required">اعادة تعيين</button>
+
+
+  </form>
+
+</section>
+<!-- Default form subscription -->
