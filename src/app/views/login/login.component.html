@@ -11,7 +11,7 @@
 
     <form [formGroup]="logInForm" (ngSubmit)="logIn()">
 
-      <h1 class="h4 mb-4">تسجيل الدخول</h1>
+      <h2 class="mb-4">تسجيل الدخول</h2>
 
 
       <!-- userName -->
@@ -31,7 +31,7 @@
       </div>
 
       <!-- Sign in button -->
-      <button class="btn custom-btn" type="submit" [disabled]="!logInForm.valid">دخول</button>
+      <button class="btn custom-btn text-white" type="submit" [disabled]="!logInForm.valid">دخول</button>
 
 
     </form>
