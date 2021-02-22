@@ -49,14 +49,14 @@ export class IndexDeptComponent implements OnInit {
       // console.log(tr, id)
       this.service.delete(`departments/delete/${id}`).subscribe(
         data => {
-          console.log(data)
+          // console.log(data)
           localStorage.setItem('loadingFlag', 'false')
           this.service.handleSuccess()
           tr.classList.add('d-none');
         },
         error => {
           localStorage.setItem('loadingFlag', 'false')
-          console.log(error)
+          // console.log(error)
           this.service.handleError(error)
           // this.service.onShowWarning()
         }
