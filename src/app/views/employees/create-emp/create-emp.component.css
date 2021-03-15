@@ -1,0 +1,63 @@
+.form-control {
+  width: auto;
+}
+
+/* section {
+  overflow-y: scroll;
+} */
+
+.collapsible {
+  background-color: var(--purple-light);
+  color           : white;
+  cursor          : pointer;
+  /* padding      : 18px; */
+  width           : 100%;
+  border          : none;
+  /* text-align   : left; */
+  outline         : none;
+  font-size       : 20px;
+}
+
+.active,
+.collapsible:hover {
+  background-color: var(--purple-light);
+}
+
+.collapsible:after {
+  content       : '\002B';
+  color         : white;
+  font-weight   : bold;
+  float         : right;
+  /* margin-left: 5px; */
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 28px;
+  max-height: 0;
+  /* overflow: hidden; */
+  transition: max-height 0.2s ease-out;
+  /*background-color: #f1f1f1;*/
+  -webkit-transition: max-height 0.2s ease-out;
+  -moz-transition: max-height 0.2s ease-out;
+  -ms-transition: max-height 0.2s ease-out;
+  -o-transition: max-height 0.2s ease-out;
+  -webkit-transition: max-height 0.2s ease-out;
+}
+
+/* hide arrows in input type number */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

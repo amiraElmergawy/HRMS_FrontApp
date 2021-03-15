@@ -1,0 +1,50 @@
+<div class="h-100 w-100 ar-dir bg-white card p-4" *ngIf="employees != '' && employees?.length != 0">
+
+  <div class="input-group">
+
+    <input class="form-control ar-dir daisy-color" placeholder=" بحث بالاسم ..." name="filteringValue" type="text" [(ngModel)]="filteringValue" required>
+
+  </div>
+
+  <table class="table table-hover mt-3 scroll daisy-color">
+    <thead>
+      <tr class="header">
+        <th scope="col">الكود</th>
+        <th scope="col"> الاسم </th>
+        <th scope="col"> رقم التليفون </th>
+        <th scope="col"> العنوان </th>
+        <th scope="col"> السن </th>
+        <th scope="col"> الرقم القومي </th>
+        <th scope="col"> الوظيفة </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees | filter: filteringValue | paginate:{itemsPerPage: 6, currentPage:p}" (click)="navigate(emp._id)">
+        <td>{{emp.code}}</td>
+        <td>
+          {{emp.personalData.name}}
+        </td>
+        <td>
+          {{emp.personalData.phoneNo}}
+        </td>
+        <td>
+          {{emp.personalData.address}}
+        </td>
+        <td>
+          {{emp.personalData.age}}
+        </td>
+        <td>
+          {{emp.nationalData.nID}}
+        </td>
+        <td>
+          {{emp.jobData.job}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="pagination">
+    <pagination-controls previousLabel="السابق" nextLabel="التالي" (pageChange)="p=$event"></pagination-controls>
+  </div>
+
+</div>

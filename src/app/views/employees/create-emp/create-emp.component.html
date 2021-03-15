@@ -1,0 +1,672 @@
+<!-- Default form subscription -->
+
+
+<section class="text-center border rounded border-light p-3 w-100 mx-auto bg-white ar-dir card ">
+
+  <form [formGroup]="empForm" (ngSubmit)="add()">
+
+    <h1 class="mb-3 daisy-color">اضافة موظف</h1>
+
+    <!-- personal data section -->
+    <button type="button" class="collapsible mb-4">بيانات شخصية</button>
+    <div formGroupName="personalData" class="content m-auto overflow-auto">
+
+      <input type="text" formControlName="name" class="form-control mb-2 daisy-color text-center m-auto"
+        placeholder="اسم الموظف" style="font-size: 1.5rem;" readonly>
+
+      <div class="row text-center p-2">
+
+        <!-- first name -->
+        <!-- <label class="h4 daisy-color">الاسم : &nbsp;</label> -->
+        <input class="form-control daisy-color col-md-6 col-lg-3" id="firstName" name="firstName" type="text"
+          formControlName="firstName" placeholder="الاسم الاول">
+        <div
+          *ngIf="empForm.get('personalData.firstName').invalid && (empForm.get('personalData.firstName').touched || empForm.get('personalData.firstName').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.firstName').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.firstName').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+        <!-- second Name -->
+        <input class="form-control daisy-color col-md-6 col-lg-3" id="secondName" name="secondName" type="text"
+          formControlName="secondName" placeholder="الثاني">
+        <div
+          *ngIf="empForm.get('personalData.secondName').invalid && (empForm.get('personalData.secondName').touched || empForm.get('personalData.secondName').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.secondName').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.secondName').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+        <!-- third name -->
+        <input class="form-control daisy-color col-md-6 col-lg-3" id="thirdName" name="thirdName" type="text"
+          formControlName="thirdName" placeholder="الثالث">
+        <div
+          *ngIf="empForm.get('personalData.thirdName').invalid && (empForm.get('personalData.thirdName').touched || empForm.get('personalData.thirdName').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.thirdName').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.thirdName').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+        <!-- family Name -->
+        <input class="form-control daisy-color col-md-6 col-lg-3" id="familyName" name="familyName" type="text"
+          formControlName="familyName" placeholder="لقب العائله">
+        <div
+          *ngIf="empForm.get('personalData.familyName').invalid && (empForm.get('personalData.familyName').touched || empForm.get('personalData.familyName').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.familyName').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.familyName').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+      </div>
+
+
+      <!-- gender -->
+      <div class="form-check mt-1">
+        <label *ngFor="let gender of genders; let i = index" for="gender">
+          <input type="radio" name="gender" [value]="i" formControlName="gender" required>
+          {{ gender }} &nbsp;&nbsp;
+        </label>
+      </div>
+
+      <!-- religion -->
+      <div class="form-check mt-1">
+        <label *ngFor="let religion of religions; let i = index" for="religion">
+          <input type="radio" name="religion" [value]="i" formControlName="religion" required>
+          {{ religion }} &nbsp;
+        </label>
+      </div>
+
+      <div class="row text-center p-3">
+
+
+        <!-- nationality -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="Nationality" name="Nationality"
+          type="text" formControlName="Nationality" placeholder="الجنسية">
+        <div
+          *ngIf="empForm.get('personalData.Nationality').invalid && (empForm.get('personalData.Nationality').touched || empForm.get('personalData.Nationality').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.Nationality').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.Nationality').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- mStatus -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="mStatus" name="mStatus" type="text"
+          formControlName="mStatus" placeholder="الحالة الاجتماعية">
+        <div
+          *ngIf="empForm.get('personalData.mStatus').invalid && (empForm.get('personalData.mStatus').touched || empForm.get('personalData.mStatus').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.mStatus').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.mStatus').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- phoneNo -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="phoneNo" name="phoneNo"
+          type="number" formControlName="phoneNo" placeholder="رقم التليفون">
+        <div
+          *ngIf="empForm.get('personalData.phoneNo').invalid && (empForm.get('personalData.phoneNo').touched || empForm.get('personalData.phoneNo').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.phoneNo').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.phoneNo').errors['pattern']" class="alert-warning p-2 rounded">
+            يجب ان يكون عدد الارقام 11
+          </div>
+        </div>
+
+      </div>
+      <div class="row text-center p-3">
+
+        <!-- address -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="address" name="address" type="text"
+          formControlName="address" placeholder="العنوان">
+        <div
+          *ngIf="empForm.get('personalData.address').invalid && (empForm.get('personalData.address').touched || empForm.get('personalData.address').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.address').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.address').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يجب كتابة علامات او احرف غير العربيه
+          </div>
+        </div>
+
+        <!-- country -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="country" name="country" type="text"
+          formControlName="country" placeholder="المحافظه">
+        <div
+          *ngIf="empForm.get('personalData.country').invalid && (empForm.get('personalData.country').touched || empForm.get('personalData.country').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.country').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.country').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- birthDate -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="birthDate" name="birthDate"
+          type="text" formControlName="birthDate" placeholder="تاريخ الميلاد" onfocus="(this.type='date')">
+        <div
+          *ngIf="empForm.get('personalData.birthDate').invalid && (empForm.get('personalData.birthDate').touched || empForm.get('personalData.birthDate').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.birthDate').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row text-center p-3">
+
+        <!-- age -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="age" name="age" type="number"
+          formControlName="age" placeholder="العمر">
+        <div
+          *ngIf="empForm.get('personalData.age').invalid && (empForm.get('personalData.age').touched || empForm.get('personalData.age').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.age').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.age').errors['min']" class="alert-danger p-2 rounded">
+            لا يجب ان يكون السن اقل من 18
+          </div>
+        </div>
+
+        <!-- birthPlace -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="birthPlace" name="birthPlace"
+          type="text" formControlName="birthPlace" placeholder="مكان الميلاد">
+        <div
+          *ngIf="empForm.get('personalData.birthPlace').invalid && (empForm.get('personalData.birthPlace').touched || empForm.get('personalData.birthPlace').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.birthPlace').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.birthPlace').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- motherName -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="motherName" name="motherName"
+          type="text" formControlName="motherName" placeholder="اسم الام">
+        <div
+          *ngIf="empForm.get('personalData.motherName').invalid && (empForm.get('personalData.motherName').touched || empForm.get('personalData.motherName').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('personalData.motherName').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('personalData.motherName').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+          <div
+            *ngIf="empForm.get('personalData.motherName').errors['minLength'] || empForm.get('personalData.motherName').errors['maxLength']"
+            class="alert-warning p-2 rounded">
+            لا يجب ان يكون عدد الاحرف اقل من 2 او اكبر 100
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <!-- national data section -->
+    <button type="button" class="collapsible mb-4">بيانات الرقم القومي</button>
+    <div formGroupName="nationalData" class="content m-auto overflow-auto">
+
+      <div class="row text-center px-2 pb-4">
+
+        <!-- nID -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="nID" name="nID" type="number"
+          formControlName="nID" placeholder="الرقم القومي">
+        <div
+          *ngIf="empForm.get('nationalData.nID').invalid && (empForm.get('nationalData.nID').touched || empForm.get('nationalData.nID').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('nationalData.nID').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('nationalData.nID').errors['pattern']" class="alert-warning p-2 rounded">
+            يجب ان يكون عدد الارقام 14
+          </div>
+        </div>
+
+        <!-- cRegistry -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="cRegistry" name="cRegistry"
+          type="text" formControlName="cRegistry" placeholder="السجل المدني">
+        <div
+          *ngIf="empForm.get('nationalData.cRegistry').invalid && (empForm.get('nationalData.cRegistry').touched || empForm.get('nationalData.cRegistry').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('nationalData.cRegistry').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('nationalData.cRegistry').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- currentAddress -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="currentAddress"
+          name="currentAddress" type="text" formControlName="currentAddress" placeholder=" العنوان الحالي">
+        <div
+          *ngIf="empForm.get('nationalData.currentAddress').invalid && (empForm.get('nationalData.currentAddress').touched || empForm.get('nationalData.currentAddress').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('nationalData.currentAddress').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('nationalData.currentAddress').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يجب كتابة علامات او احرف غير العربيه
+          </div>
+        </div>
+      </div>
+
+      <div class="row text-center px-2 pb-4">
+
+        <!-- country -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="country" name="country" type="text"
+          formControlName="country" placeholder="المحافظه">
+        <div
+          *ngIf="empForm.get('nationalData.country').invalid && (empForm.get('nationalData.country').touched || empForm.get('nationalData.country').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('nationalData.country').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('nationalData.country').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+
+        <!-- issDate -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="issDate" name="issDate" type="text"
+          formControlName="issDate" placeholder="تاريخ الاصدار" onfocus="(this.type='date')">
+        <div
+          *ngIf="empForm.get('nationalData.issDate').invalid && (empForm.get('nationalData.issDate').touched || empForm.get('nationalData.issDate').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('nationalData.issDate').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+        <!-- expDate -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="expDate" name="expDate" type="text"
+          formControlName="expDate" placeholder="تاريخ الانتهاء" onfocus="(this.type='date')">
+        <div
+          *ngIf="empForm.get('nationalData.expDate').invalid && (empForm.get('nationalData.expDate').touched || empForm.get('nationalData.expDate').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('nationalData.expDate').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+        <div
+          *ngIf="empForm.get('nationalData.expDate').valid && (empForm.get('nationalData.expDate').value <= empForm.get('nationalData.issDate').value)"
+          class="alert-warning p-2 rounded">
+          ادخل تواريخ صحيحه
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- academic data section -->
+    <button type="button" class="collapsible mb-4"> بيانات المؤهل الدراسي</button>
+    <div formGroupName="academicData" class="content m-auto overflow-auto">
+
+      <div class="row text-center py-2 px-3">
+
+        <!-- acadQualification -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="acadQualification"
+          name="acadQualification" type="text" formControlName="acadQualification" placeholder="المؤهل الدراسي">
+        <div
+          *ngIf="empForm.get('academicData.acadQualification').invalid && (empForm.get('academicData.acadQualification').touched || empForm.get('academicData.acadQualification').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('academicData.acadQualification').errors['required']"
+            class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('academicData.acadQualification').errors['pattern']"
+            class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- specialization -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="specialization"
+          name="specialization" type="text" formControlName="specialization" placeholder="التخصص">
+        <div
+          *ngIf="empForm.get('academicData.specialization').invalid && (empForm.get('academicData.specialization').touched || empForm.get('academicData.specialization').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('academicData.specialization').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('academicData.specialization').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- degree -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="degree" name="degree" type="text"
+          formControlName="degree" placeholder="التقدير ">
+        <div
+          *ngIf="empForm.get('academicData.degree').invalid && (empForm.get('academicData.degree').touched || empForm.get('academicData.degree').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('academicData.degree').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('academicData.degree').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+      </div>
+
+      <div class="row text-center py-2 px-3">
+
+        <!-- university -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="university" name="university"
+          type="text" formControlName="university" placeholder=" الجامعة">
+        <div
+          *ngIf="empForm.get('academicData.university').invalid && (empForm.get('academicData.university').touched || empForm.get('academicData.university').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('academicData.university').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('academicData.university').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- collage -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="collage" name="collage" type="text"
+          formControlName="collage" placeholder=" الكلية">
+        <div
+          *ngIf="empForm.get('academicData.collage').invalid && (empForm.get('academicData.collage').touched || empForm.get('academicData.collage').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('academicData.collage').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('academicData.collage').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- yearsNo -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="yearsNo" name="yearsNo"
+          type="number" formControlName="yearsNo" placeholder=" عدد سنوات الدراسه">
+        <div
+          *ngIf="empForm.get('academicData.yearsNo').invalid && (empForm.get('academicData.yearsNo').touched || empForm.get('academicData.yearsNo').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('academicData.yearsNo').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row text-center py-2 px-5">
+
+        <!-- gradYear -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-4 offset-2" id="gradYear" name="gradYear"
+          type="text" formControlName="gradYear" placeholder=" سنة التخرج">
+        <div
+          *ngIf="empForm.get('academicData.gradYear').invalid && (empForm.get('academicData.gradYear').touched || empForm.get('academicData.gradYear').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('academicData.gradYear').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('academicData.gradYear').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- anotherQualifications -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-4 offset-2" id="anotherQualifications"
+          name="anotherQualifications" type="text" formControlName="anotherQualifications" placeholder="مؤهلات اخري">
+        <div
+          *ngIf="empForm.get('academicData.anotherQualifications').invalid && (empForm.get('academicData.anotherQualifications').touched || empForm.get('academicData.anotherQualifications').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('academicData.anotherQualifications').errors['pattern']"
+            class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- contract data section -->
+    <button type="button" class="collapsible mb-4"> بيانات العقد</button>
+    <div formGroupName="contractData" class="content m-auto overflow-auto">
+
+      <div class="row text-center py-2 px-3">
+        <!-- hireDate -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="hireDate" name="hireDate"
+          type="text" formControlName="hireDate" placeholder="تاريخ التعيين" onfocus="(this.type='date')">
+        <div
+          *ngIf="empForm.get('contractData.hireDate').invalid && (empForm.get('contractData.hireDate').touched || empForm.get('contractData.hireDate').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('contractData.hireDate').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="workYearsNo" name="workYearsNo"
+          type="number" formControlName="workYearsNo" placeholder="عدد سنوات الخدمه ">
+
+
+        <!-- contractType -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="contractType" name="contractType"
+          type="text" formControlName="contractType" placeholder="نوع العقد">
+        <div
+          *ngIf="empForm.get('contractData.contractType').invalid && (empForm.get('contractData.contractType').touched || empForm.get('contractData.contractType').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('contractData.contractType').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('contractData.contractType').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+      </div>
+
+      <div class="row text-center py-2 px-3">
+        <!-- opType -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="opType" name="opType" type="text"
+          formControlName="opType" placeholder=" نوع التشغيل">
+        <div
+          *ngIf="empForm.get('contractData.opType').invalid && (empForm.get('contractData.opType').touched || empForm.get('contractData.opType').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('contractData.opType').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('contractData.opType').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- startaDate -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="startaDate" name="startaDate"
+          type="text" formControlName="startaDate" placeholder="تاريخ البداية" onfocus="(this.type='date')">
+        <div
+          *ngIf="empForm.get('contractData.startaDate').invalid && (empForm.get('contractData.startaDate').touched || empForm.get('contractData.startaDate').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('contractData.startaDate').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+        <!-- endDate -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="endDate" name="endDate" type="text"
+          formControlName="endDate" placeholder="تاريخ النهاية" onfocus="(this.type='date')">
+        <div
+          *ngIf="empForm.get('contractData.endDate').invalid && (empForm.get('contractData.endDate').touched || empForm.get('contractData.endDate').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('contractData.endDate').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+        <div
+          *ngIf="empForm.get('contractData.endDate').valid && (empForm.get('contractData.endDate').value <= empForm.get('contractData.startaDate').value)"
+          class="alert-warning p-2 rounded">
+          ادخل تواريخ صحيحه
+        </div>
+      </div>
+
+      <div class="row text-center py-2 px-3">
+        <!-- insuranceNo -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="insuranceNo" name="insuranceNo"
+          type="number" formControlName="insuranceNo" placeholder="الرقم التأميني">
+        <div
+          *ngIf="empForm.get('contractData.insuranceNo').invalid && (empForm.get('contractData.insuranceNo').touched || empForm.get('contractData.insuranceNo').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('contractData.insuranceNo').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+        <!-- insuranceDate -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="insuranceDate" name="insuranceDate"
+          type="text" formControlName="insuranceDate" placeholder="تاريخ التأمين" onfocus="(this.type='date')">
+        <div
+          *ngIf="empForm.get('contractData.insuranceDate').invalid && (empForm.get('contractData.insuranceDate').touched || empForm.get('contractData.insuranceDate').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('contractData.insuranceDate').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+        <div
+          *ngIf="empForm.get('contractData.insuranceDate').valid && (empForm.get('contractData.insuranceDate').value <= empForm.get('contractData.hireDate').value)"
+          class="alert-warning p-2 rounded">
+          ادخل تواريخ صحيحه
+        </div>
+      </div>
+
+    </div>
+
+    <!-- job data section -->
+    <button type="button" class="collapsible mb-4"> بيانات الوظيفه</button>
+    <div formGroupName="jobData" class="content m-auto overflow-auto">
+
+      <div class="row text-center py-2 px-3">
+        <!-- job -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="job" name="job" type="text"
+          formControlName="job" placeholder="  الوظيفة">
+        <div
+          *ngIf="empForm.get('jobData.job').invalid && (empForm.get('jobData.job').touched || empForm.get('jobData.job').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('jobData.job').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('jobData.job').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+
+        <!-- dept -->
+        <div class="ar-dir mb-3 col-md-6 col-lg-3 offset-1" *ngIf="departments != ''">
+          <select formControlName="dept" class="form-select daisy-color">
+            <option selected disabled value=""> القسم ... </option>
+            <option *ngFor="let dept of departments" value="{{dept._id}}">{{dept.name}}</option>
+          </select>
+        </div>
+        <div
+          *ngIf="empForm.get('jobData.dept').invalid && (empForm.get('jobData.dept').touched || empForm.get('jobData.dept').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('jobData.dept').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+        <!-- directPoss -->
+        <div class="ar-dir mb-3 col-md-6 col-lg-3 offset-1" *ngIf="employees != ''">
+          <select formControlName="directPoss" class="form-select daisy-color">
+            <option selected disabled value=""> الرئيس المباشر ... </option>
+            <option *ngFor="let emp of employees" value="{{emp._id}}">{{emp.personalData.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row text-center py-2 px-3">
+
+        <!-- salary -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="salary" name="salary" type="number"
+          formControlName="salary" placeholder=" الراتب عند التعيين">
+        <div
+          *ngIf="empForm.get('jobData.salary').invalid && (empForm.get('jobData.salary').touched || empForm.get('jobData.salary').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('jobData.salary').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+        <!-- currentSalary -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="currentSalary" name="currentSalary"
+          type="number" formControlName="currentSalary" placeholder=" الراتب الحالي">
+        <div
+          *ngIf="empForm.get('jobData.currentSalary').invalid && (empForm.get('jobData.currentSalary').touched || empForm.get('jobData.currentSalary').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('jobData.currentSalary').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+        </div>
+
+
+        <!-- endStatus -->
+        <input class="form-control mb-2 daisy-color col-md-6 col-lg-3 offset-1" id="endStatus" name="endStatus"
+          type="text" formControlName="endStatus" placeholder="  انتهاء الحاله">
+        <div
+          *ngIf="empForm.get('jobData.endStatus').invalid && (empForm.get('jobData.endStatus').touched || empForm.get('jobData.endStatus').dirty)"
+          class="mb-1 alert">
+          <div *ngIf="empForm.get('jobData.endStatus').errors['required']" class="alert-danger p-2 rounded">
+            هذا الحقل مطلوب
+          </div>
+          <div *ngIf="empForm.get('jobData.endStatus').errors['pattern']" class="alert-warning p-2 rounded">
+            لا يسمح بادخال علامات او احرف غير العربية
+          </div>
+        </div>
+      </div>
+
+      <!-- status -->
+      <div class="form-check mt-1">
+        <label *ngFor="let stat of status; let i = index" for="status">
+          <input type="radio" name="status" [value]="i" formControlName="status" required>
+          {{ stat }} &nbsp;&nbsp;
+        </label>
+      </div>
+
+
+    </div>
+
+
+    <!-- Submit button -->
+    <button class="btn custom-btn text-white" type="submit">اضافه</button>
+    <button class="btn btn-secondary mx-2" (click)="clear()" *ngIf="empForm.dirty && empForm.invalid">اعادة
+      تعيين</button>
+
+
+  </form>
+
+</section>
+<!-- Default form subscription -->

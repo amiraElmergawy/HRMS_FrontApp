@@ -1,0 +1,189 @@
+<main *ngIf="employee !=''" class="ar-dir bg-white overflow-auto">
+
+  <div class="bg-light pt-3 px-3 pt-md-2 px-md-5 overflow-hidden card d-flex flex-row">
+
+    <h2 class="display-5 mx-auto">
+      {{employee?.personalData?.name}}
+    </h2>
+
+    <div *ngIf="currentUserType" class="mt-1">
+      <ng-container *ngIf="deleteFlag; else elseTemplate">
+        <span class="btn custom-update-btn mx-2 text-white" (click)="deleteEmp()">مسح</span>
+        <span class="btn btn-secondary text-white" (click)="deleteFlag = false">الغاء</span>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <span class="btn custom-delete-btn" (click)="deleteFlag = true" title="مسح">
+          <i class="fas fa-trash-alt text-white"></i>
+        </span>
+        &nbsp;
+        <span class="btn custom-update-btn" title="تعديل" (click)="navigate()">
+          <i class="fas fa-pencil-alt text-white"></i>
+        </span>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+    <!-- personalData section -->
+    <div class="bg-light me-md-3 pt-3 pt-md-2 overflow-auto text-center card h-25">
+      <h1>البيانات الشخصيه</h1>
+      <h2>
+        كود الموظف : {{employee?.code}}
+      </h2>
+      <!-- <button type="button" class="collapsible">بيانات شخصية</button> -->
+      <!-- <div class="content"> -->
+        <h3>
+          النوع :
+          <ng-container *ngIf="employee?.personalData?.gender == 0; else elseTemplate">
+            ذكر
+          </ng-container>
+          <ng-template #elseTemplate>
+            أنثي
+          </ng-template>
+        </h3>
+        <h3>
+          الديانه :
+          <ng-container *ngIf="employee?.personalData?.religion == 0; else elseTemplate">
+            مسلم
+          </ng-container>
+          <ng-template #elseTemplate>
+            مسيحي
+          </ng-template>
+        </h3>
+        <h3>
+          الجنسية : {{employee?.personalData?.Nationality}}
+        </h3>
+        <h3>
+          الحالة الاجتماعيه : {{employee?.personalData?.mStatus}}
+        </h3>
+        <h3>
+          رقم التليفون : {{employee?.personalData?.phoneNo}}
+        </h3>
+        <h3>
+          العنوان : {{employee?.personalData?.address}}-{{employee?.personalData?.country}}
+        </h3>
+        <h3>
+          تاريخ الميلاد : {{employee?.personalData?.birthDate}}
+        </h3>
+        <h3>
+          السن : {{employee?.personalData?.age}}
+        </h3>
+        <h3>
+          مكان الميلاد : {{employee?.personalData?.birthPlace}}
+        </h3>
+        <h3>
+          اسم الام : {{employee?.personalData?.motherName}}
+        </h3>
+      <!-- </div> -->
+    </div>
+    <!-- nationalData section -->
+    <div class="bg-light me-md-3 pt-3 pt-md-2 overflow-hidden text-center card">
+      <h1>بيانات الرقم القومي</h1>
+      <h3>
+        الرقم القومي : {{employee?.nationalData?.nID}}
+      </h3>
+      <h3>
+        السجل المدني : {{employee?.nationalData?.cRegistry}}
+      </h3>
+      <h3>
+        العنوان الحالي : {{employee?.nationalData?.currentAddress}}
+      </h3>
+      <h3>
+        المحافظة : {{employee?.nationalData?.country}}
+      </h3>
+      <h3>
+        تاريخ الاصدار : {{employee?.nationalData?.issDate}}
+      </h3>
+      <h3>
+        تاريخ الانتهاء : {{employee?.nationalData?.expDate}}
+      </h3>
+    </div>
+  </div>
+  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+    <!-- academicData section -->
+    <div class="bg-light me-md-3 pt-3 pt-md-2 overflow-hidden text-center card">
+      <h1>بيانات المؤهل الدراسي</h1>
+      <h3>
+        المؤهل الدراسي : {{employee?.academicData?.acadQualification}}
+      </h3>
+      <h3>
+        التخصص : {{employee?.academicData?.specialization}}
+      </h3>
+      <h3>
+        التقدير : {{employee?.academicData?.degree}}
+      </h3>
+      <h3>
+        الجامعه : {{employee?.academicData?.university}}
+      </h3>
+      <h3>
+        الكلية : {{employee?.academicData?.collage}}
+      </h3>
+      <h3>
+        عدد سنوات الدراسة : {{employee?.academicData?.yearsNo}}
+      </h3>
+      <h3>
+        سنة التخرج : {{employee?.academicData?.gradYear}}
+      </h3>
+      <h3 *ngIf="employee?.academicData?.anotherQualifications">
+        مؤهلات اخري : {{employee?.academicData?.anotherQualifications}}
+      </h3>
+    </div>
+    <!-- contractData section  -->
+    <div class="bg-light me-md-3 pt-3 pt-md-2 overflow-hidden text-center card">
+      <h1>بيانات عقد العمل</h1>
+      <h3>
+        تاريخ التعيين : {{employee?.contractData?.hireDate}}
+      </h3>
+      <h3>
+        عدد سنوات الخدمة : {{employee?.contractData?.workYearsNo}}
+      </h3>
+      <h3>
+        نوع العقد : {{employee?.contractData?.contractType}}
+      </h3>
+      <h3>
+        نوع التشغيل : {{employee?.contractData?.opType}}
+      </h3>
+      <h3>
+        تاريخ البداية : {{employee?.contractData?.startaDate}}
+      </h3>
+      <h3>
+        تاريخ الانتهاء : {{employee?.contractData?.endDate}}
+      </h3>
+      <h3>
+        الرقم التأميني : {{employee?.contractData?.insuranceNo}}
+      </h3>
+      <h3>
+        تاريخ التأمين : {{employee?.contractData?.insuranceDate}}
+      </h3>
+    </div>
+    <!-- jobData section -->
+    <div class="bg-light me-md-3 pt-3 pt-md-2 overflow-hidden text-center card">
+      <h1>بيانات الوظيفه</h1>
+      <h3>
+        الوظيفة : {{employee?.jobData?.job}}
+      </h3>
+      <h3>
+        القسم : {{empDept?.name}}
+      </h3>
+      <h3 *ngIf="empHead && empHead != ''">
+        الرئيس المباشر : {{empHead?.personalData?.name}}
+      </h3>
+      <h3>
+        الراتب عند التعيين : {{employee?.jobData?.salary}}
+      </h3>
+      <h3>
+        الراتب الحالي : {{employee?.jobData?.currentSalary}}
+      </h3>
+      <h3>
+        انتهاء الحاله : {{employee?.jobData?.endStatus}}
+      </h3>
+      <h3>
+        <ng-container *ngIf="employee?.jobData?.status == 1">
+          غير
+        </ng-container>
+        خاضع للاضافي
+      </h3>
+    </div>
+
+  </div>
+</main>
