@@ -1,14 +1,9 @@
-<!-- <flash-messages></flash-messages> -->
-<!-- <div class="alert alert-success alert-dismissible fade show"> -->
-<!-- <strong>Success!</strong> Your message has been sent successfully. -->
-<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-<!-- </div> -->
-<ng-container *ngIf="loadingFlag; else elseTemplate">
-  <div class="loader loading">Loading...</div>
+<ng-container *ngIf="loadingFlag">
+  <div class="m-auto center">
+    <div class="loader loading">Loading...</div>
+  </div>
 </ng-container>
-<ng-template #elseTemplate>
-  <flash-messages></flash-messages>
-</ng-template>
+<flash-messages></flash-messages>
 <div id="grayOutDiv">
   <router-outlet></router-outlet>
 </div>

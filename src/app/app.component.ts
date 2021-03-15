@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +9,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Front';
   loadingFlag = false
+  constructor(private localSt:LocalStorageService){}
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    // localStorage.observe('loadingFlag').subscribe((value)=>{
-    //   setTimeout(()=>{this.loadingFlag=value});
-    // });
-    // this.loadingFlag = localStorage.getItem('loadingFlag')
-    // window.addEventListener(localStorage.getItem('loadingFlag'), _=>{
-    //   console.log(localStorage.getItem('loadingFlag'))
-
-    //   // if(value)
-    // })
-    // localStorage.observe('loadingFlag').subscribe((value)=>{
-    //   setTimeout(()=>{console.log(value)});
-    // });
+    this.localSt.observe('loadingFlag').subscribe((value)=>{
+      setTimeout(_=>{
+        this.loadingFlag = value
+      });
+    });
   }
 }
