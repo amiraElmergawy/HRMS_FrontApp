@@ -1,0 +1,99 @@
+<div class="wrapper ar-dir">
+
+
+  <!-- Sidebar Holder -->
+  <nav id="sidebar" class="{{sidebarFlag? '': 'active'}}">
+    <div class="sidebar-header text-center">
+      <!-- <h1 class="text-center"> مركز د يس &nbsp; عبد الغفار</h1> -->
+      <h1>مركز د يس</h1>
+      <h1>عبد الغفار</h1>
+    </div>
+
+    <ul class="list-unstyled components">
+      <li class="my-3">
+        <a (click)="deptFlag =! deptFlag; empFlag = false; adminFlag = false" class="pointer" aria-expanded="false">
+          الاقسام
+          &nbsp;<i class="fas fa-caret-down"></i>
+        </a>
+        <ul class="{{!deptFlag?'collapse':''}} list-unstyled">
+          <li>
+            <a routerLink="search-department">بحث</a>
+          </li>
+          <li>
+            <a routerLink="show-all-departments">عرض </a>
+          </li>
+          <li>
+            <a routerLink="add-department">اضافة</a>
+          </li>
+        </ul>
+
+      </li>
+      <li class="my-3">
+        <a class="pointer" aria-expanded="false" (click)="empFlag =! empFlag; deptFlag = false; adminFlag = false">
+          الموظفين
+          &nbsp;<i class="fas fa-caret-down"></i>
+        </a>
+        <ul class="{{!empFlag?'collapse':''}} list-unstyled" >
+          <!-- <li>
+            <a routerLink="search-employee">بحث</a>
+          </li> -->
+          <li>
+            <a routerLink="show-all-employees">عرض </a>
+          </li>
+          <li>
+            <a routerLink="add-employee">اضافة</a>
+          </li>
+        </ul>
+      </li>
+      <li class="my-3" *ngIf="currentUserType">
+        <a class="pointer" aria-expanded="false" (click)="adminFlag =! adminFlag; deptFlag = false; empFlag = false">
+          المستخدمين
+          &nbsp;<i class="fas fa-caret-down"></i>
+        </a>
+        <ul class="{{!adminFlag?'collapse':''}} list-unstyled">
+          <li>
+            <a routerLink="show-all-users">عرض</a>
+          </li>
+          <li>
+            <a routerLink="add-user">اضافة</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Page Content Holder -->
+  <div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+        <button type="button" id="sidebarCollapse" class="navbar-btn {{sidebarFlag? '': 'active'}}"
+          (click)="sidebarFlag =! sidebarFlag">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation" (click)="sidebarFlag =! sidebarFlag">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item active">
+              <span class="btn navbar-btn bg-light p-2 purple-color" (click)="logOut()">
+                تسجيل الخروج
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <router-outlet></router-outlet>
+
+  </div>
+
+</div>
