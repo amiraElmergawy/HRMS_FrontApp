@@ -22,11 +22,14 @@ import { CreateAdminComponent } from './views/admins/create-admin/create-admin.c
 import { IndexAdminComponent } from './views/admins/index-admin/index-admin.component';
 import { CreateEmpComponent } from './views/employees/create-emp/create-emp.component';
 import { IndexEmpComponent } from './views/employees/index-emp/index-emp.component';
-import { SearchEmpComponent } from './views/employees/search-emp/search-emp.component';
 import { NgxPaginationModule } from "ngx-pagination";
 import { UpdateAdminComponent } from './views/admins/update-admin/update-admin.component';
 // import { SimpleModalModule } from "ngx-simple-modal";
 import { ShowDeptComponent } from './views/departments/show-dept/show-dept.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { ShowEmpComponent } from './views/employees/show-emp/show-emp.component';
+import { UpdateEmpComponent } from './views/employees/update-emp/update-emp.component';
+import { NgxWebstorageModule } from "ngx-webstorage";
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -44,9 +47,11 @@ import { ShowDeptComponent } from './views/departments/show-dept/show-dept.compo
     IndexAdminComponent,
     CreateEmpComponent,
     IndexEmpComponent,
-    SearchEmpComponent,
     UpdateAdminComponent,
     ShowDeptComponent,
+    FilterPipe,
+    ShowEmpComponent,
+    UpdateEmpComponent,
   ],
   imports: [
   BrowserModule,
@@ -56,6 +61,7 @@ import { ShowDeptComponent } from './views/departments/show-dept/show-dept.compo
     FlashMessagesModule.forRoot(),
     FormsModule,
     NgxPaginationModule,
+    NgxWebstorageModule.forRoot(),
     // SimpleModalModule
     // SimpleModalModule.forRoot({container: "modal-container"})
     // NgbModule,
