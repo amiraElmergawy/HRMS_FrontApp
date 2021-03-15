@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LocalStorageService } from 'ngx-webstorage';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class CreateAdminComponent implements OnInit {
 
   currentUser=''
 
-  constructor(private service: MainService) { }
+  constructor(private service: MainService, private storage:LocalStorageService) { }
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -37,7 +38,7 @@ export class CreateAdminComponent implements OnInit {
 
   add(){
     if (this.addAdminForm.valid) {
-      localStorage.setItem('loadingFlag','true')
+      this.storage.store('loadingFlag',true)
       // this.alertFlag = false
       // console.log(this.addAdminForm.value)
       const obj = {...this.addAdminForm.value,type:0}
@@ -45,11 +46,11 @@ export class CreateAdminComponent implements OnInit {
       this.service.create('admins',obj).subscribe(
         data=>{
           console.log(data)
-          localStorage.setItem('loadingFlag','false')
+          this.storage.store('loadingFlag', false)
           this.service.handleSuccess()
         },
         error=>{
-          localStorage.setItem('loadingFlag','false')
+          this.storage.store('loadingFlag', false)
           console.log(error)
           this.service.handleError(error)
           // this.service.onShowWarning()

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import { SimpleModalService } from 'ngx-simple-modal';
+import { LocalStorageService } from 'ngx-webstorage';
 import { MainService } from 'src/app/services/main.service';
 import { SharingDataService } from 'src/app/services/sharing-data.service';
-// import { UpdateAdminComponent } from '../update-admin/update-admin.component';
 
 @Component({
   selector: 'app-index-admin',
@@ -18,7 +17,7 @@ export class IndexAdminComponent implements OnInit {
   name;
   promptMessage = '';
 
-  constructor(private service: MainService, private sharingService: SharingDataService) { }
+  constructor(private service: MainService, private sharingService: SharingDataService, private storage:LocalStorageService) { }
 
   ngOnInit(): void {
     this.getAdmins()
@@ -28,15 +27,16 @@ export class IndexAdminComponent implements OnInit {
     this.admins = this.sharingService.getData()
     // console.log(this.admins)
     if (this.admins == '') {
+      this.storage.store('loadingFlag', true)
       this.service.show('admins').subscribe(
         data => {
           // console.log(data)
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           this.admins = data.data
           // this.service.handleSuccess(`تمت اضافة قسم ${data.data.name} بنجاح  `)
         },
         error => {
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           console.log(error)
           this.service.handleError(error)
           // this.service.onShowWarning()
@@ -48,16 +48,17 @@ export class IndexAdminComponent implements OnInit {
     // console.log(id, name, event.target.parentElement.parentElement.children[1].textContent)
     let updatedName = event.target.parentElement.parentElement.children[1].textContent
     if (updatedName != '') {
+      this.storage.store('loadingFlag', true)
       this.service.update(`admins/update/${id}`, { userName: updatedName }).subscribe(
         data => {
           console.log(data)
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           this.service.handleSuccess(`تم التحديث بنجاح`)
           this.getAdmins()
           this.cancel(name, event)
         },
         error => {
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           console.log(error)
           this.service.handleError(error)
           this.cancel(name, event)
@@ -75,18 +76,18 @@ export class IndexAdminComponent implements OnInit {
 
   delete(id, event) {
     let tr = event.target.parentElement.parentElement
-    // console.log(tr,id)
+    this.storage.store('loadingFlag', true)
     this.service.delete(`admins/delete/${id}`).subscribe(
       data => {
-        console.log(data)
-        localStorage.setItem('loadingFlag', 'false')
+        // console.log(data)
+        this.storage.store('loadingFlag', false)
         this.service.handleSuccess()
         tr.classList.add('d-none');
         this.getAdmins()
       },
       error => {
-        localStorage.setItem('loadingFlag', 'false')
-        console.log(error)
+        this.storage.store('loadingFlag', false)
+        // console.log(error)
         this.service.handleError(error)
         // this.service.onShowWarning()
       }

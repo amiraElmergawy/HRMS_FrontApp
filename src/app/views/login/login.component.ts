@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   currentUser=''
 
   constructor(private service: AdminService,
-    private router: Router) { }
+    private router: Router, private storage:LocalStorageService) { }
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -38,13 +39,13 @@ export class LoginComponent implements OnInit {
 
   logIn(){
     if (this.logInForm.valid) {
-      localStorage.setItem('loadingFlag','true')
+      this.storage.store('loadingFlag', true)
       // this.alertFlag = false
       // console.log()
       this.service.logIn(this.logInForm.value).subscribe(
         data=>{
           // console.log(data)
-          localStorage.setItem('loadingFlag','false')
+          this.storage.store('loadingFlag', false)
           localStorage.setItem('userType', data.data.admin.type)
           localStorage.setItem('currentUser', JSON.stringify(data.data.admin))
           localStorage.setItem('token', data.data.token)
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit {
           this.currentUser = data?.data?.admin?.userName
         },
         error=>{
-          localStorage.setItem('loadingFlag','false')
+          this.storage.store('loadingFlag', false)
           // console.log(error)
           this.service.handleError(error)
           // this.service.onShowWarning()

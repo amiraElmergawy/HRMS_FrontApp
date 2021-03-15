@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
 import { MainService } from 'src/app/services/main.service';
 // import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 // import { SimpleModalComponent } from 'ngx-simple-modal';
@@ -24,7 +25,7 @@ export class UpdateAdminComponent {
 
   currentUser = ''
 
-  constructor(private service: MainService, private actRoute: ActivatedRoute, private router: Router) {
+  constructor(private service: MainService, private actRoute: ActivatedRoute, private router: Router, private storage:LocalStorageService) {
     this.adminId = this.actRoute.snapshot.params.id.valueOf();
   }
 
@@ -43,18 +44,18 @@ export class UpdateAdminComponent {
 
   update() {
     if (this.updateAdminForm.valid) {
-      localStorage.setItem('loadingFlag', 'true')
+      this.storage.store('loadingFlag', true)
       this.service.update(`admins/update/${this.adminId}`, this.updateAdminForm.value).subscribe(
         data => {
           // console.log(data)
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           this.service.handleSuccess()
           setTimeout(_=>{
             this.router.navigate(['home/show-all-users'])
           }, 500)
         },
         error => {
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           // console.log(error)
           this.service.handleError(error)
           // this.service.onShowWarning()

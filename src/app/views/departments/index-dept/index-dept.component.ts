@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MainService } from 'src/app/services/main.service';
 import { SharingDataService } from 'src/app/services/sharing-data.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-index-dept',
@@ -12,11 +13,9 @@ export class IndexDeptComponent implements OnInit {
 
   departments = ''
   currentUserType = JSON.parse(localStorage.getItem('userType'))
-  true = true
   deleteFlag = false;
-  name
 
-  constructor(private service: MainService, private sharingService: SharingDataService) { }
+  constructor(private service: MainService, private sharingService: SharingDataService, private storage:LocalStorageService) { }
 
   ngOnInit(): void {
     this.getDepartments()
@@ -26,15 +25,16 @@ export class IndexDeptComponent implements OnInit {
     this.departments = this.sharingService.getData()
     // console.log(this.departments)
     if (this.departments == '') {
+      this.storage.store('loadingFlag', true)
       this.service.show('departments').subscribe(
         data => {
           // console.log(data)
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           this.departments = data
           // this.service.handleSuccess(`تمت اضافة قسم ${data.data.name} بنجاح  `)
         },
         error => {
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           console.log(error)
           this.service.handleError(error)
           // this.service.onShowWarning()
@@ -47,15 +47,16 @@ export class IndexDeptComponent implements OnInit {
     if (this.currentUserType) {
       let tr = event.target.parentElement.parentElement
       // console.log(tr, id)
+      this.storage.store('loadingFlag', true)
       this.service.delete(`departments/delete/${id}`).subscribe(
         data => {
           // console.log(data)
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           this.service.handleSuccess()
           tr.classList.add('d-none');
         },
         error => {
-          localStorage.setItem('loadingFlag', 'false')
+          this.storage.store('loadingFlag', false)
           // console.log(error)
           this.service.handleError(error)
           // this.service.onShowWarning()

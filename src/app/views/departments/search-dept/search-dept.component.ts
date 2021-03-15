@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { LocalStorageService } from 'ngx-webstorage';
 import { MainService } from 'src/app/services/main.service';
 import { SharingDataService } from 'src/app/services/sharing-data.service';
 
@@ -15,7 +16,7 @@ export class SearchDeptComponent implements OnInit {
   data = ''
   // deptName
 
-  constructor(private service: MainService, private sharingService: SharingDataService) { }
+  constructor(private service: MainService, private sharingService: SharingDataService, private storage:LocalStorageService) { }
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -31,7 +32,7 @@ export class SearchDeptComponent implements OnInit {
 
   search() {
     if (this.searchValue) {
-      localStorage.setItem('loadingFlag', 'true')
+      this.storage.store('loadingFlag', true)
       // console.log(this.searchForm)
       // console.log(this.searchValue)
       let searchDept = {
@@ -39,8 +40,8 @@ export class SearchDeptComponent implements OnInit {
       }
       this.service.search('departments/search', searchDept).subscribe(
         data=>{
-          console.log(data)
-          localStorage.setItem('loadingFlag','false')
+          // console.log(data)
+          this.storage.store('loadingFlag', false)
           this.data = ''
           setTimeout(_=>{
             this.data = data.data
@@ -49,7 +50,7 @@ export class SearchDeptComponent implements OnInit {
           // this.service.handleSuccess(`تمت اضافة قسم ${data.data.name} بنجاح  `)
         },
         error=>{
-          localStorage.setItem('loadingFlag','false')
+          this.storage.store('loadingFlag', false)
           console.log(error)
           this.service.handleError(error)
           // this.service.onShowWarning()
