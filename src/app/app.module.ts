@@ -15,7 +15,6 @@ import { HomeComponent } from './views/home/home.component';
 import { SidebarComponent } from './views/shared/sidebar/sidebar.component';
 import { CreateDeptComponent } from './views/departments/create-dept/create-dept.component';
 import { HTTPInterceptor } from './services/http.interceptor';
-import { FooterComponent } from './views/shared/footer/footer.component';
 import { SearchDeptComponent } from './views/departments/search-dept/search-dept.component';
 import { IndexDeptComponent } from './views/departments/index-dept/index-dept.component';
 import { CreateAdminComponent } from './views/admins/create-admin/create-admin.component';
@@ -40,7 +39,6 @@ import { NgxWebstorageModule } from "ngx-webstorage";
     HomeComponent,
     SidebarComponent,
     CreateDeptComponent,
-    FooterComponent,
     SearchDeptComponent,
     IndexDeptComponent,
     CreateAdminComponent,
